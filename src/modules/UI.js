@@ -1,6 +1,11 @@
 import { getData } from './data';
 async function renderUI(city) {
   const currentDataObj = await getData(city);
+
+  if(!currentDataObj){
+    return;
+  }
+
   const name = document.querySelector('.name');
   const condition = document.querySelector('.condition');
   const currentTemp = document.querySelector('.current-temp');
