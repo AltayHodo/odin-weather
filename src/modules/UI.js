@@ -9,6 +9,16 @@ async function renderUI(city) {
   if (!currentDataObj) {
     return;
   }
+  const condition = currentDataObj.condition;
+  const gifResponse = await fetch(
+    `https://api.giphy.com/v1/gifs/translate?api_key=o71hp7rjvc5Ue1ZOwsCdtthf4gms8Upj&s=${condition}`,
+    { mode: 'cors' }
+  );
+  const gif = await gifResponse.json();
+  const url = gif.data.images.original.url
+  const gifImage = document.querySelector('.gif-image')
+  gifImage.src = url
+
 
   updateUI(currentDataObj);
 }

@@ -1,11 +1,8 @@
-const APIKey = '036bf4f3697d4187b09201454242805';
-const baseURL = 'http://api.weatherapi.com/v1/';
-
 async function getData(city) {
   try {
     const method = 'forecast.json';
     const response = await fetch(
-      `${baseURL}${method}?key=${APIKey}&q=${city}&days=3`,
+      `http://api.weatherapi.com/v1/${method}?key=036bf4f3697d4187b09201454242805&q=${city}&days=3`,
       { mode: 'cors' }
     );
 
