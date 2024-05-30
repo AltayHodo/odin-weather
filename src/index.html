@@ -45,13 +45,18 @@
     <div class="forecast">
       <div class="forecast-title">3 day forecast</div>
       <div class="forecast-info">
-        <div class="forecast-info-top">
-          <div>Day</div>
-          <div>Icon</div>
-          <div>Chance of rain</div>
-          <div>Humidity</div>
-          <div>Temperature (high low)</div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Icon</th>
+              <th>Chance of rain</th>
+              <th>Humidity</th>
+              <th>Temperature (low-high)</th>
+            </tr>
+          </thead>
+          <tbody id="forecast-rows"></tbody>
+        </table>
       </div>
     </div>
   </body>

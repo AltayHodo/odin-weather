@@ -23,7 +23,27 @@
   font-size: 30px;
 }
 
+.forecast-info{
+  border: 1px solid red;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td{
+  /* border: 1px solid; */
+  text-align: center;
+}
+
 .forecast-info > div{
   display: flex;
+  border: 1px solid;
   justify-content: space-evenly;
+}
+
+img{
+  width: 50px;
+  height: 50px;
 }
