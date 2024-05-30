@@ -8,8 +8,10 @@
   <body>
     <header>
       <h1>Weather App</h1>
-      <input type="text" id="search" placeholder="Enter a city">
-      <button id="search-button">Search</button>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Enter a city">
+        <button id="search-button">Search</button>
+      </div>
       <button id="toggle-temp-button"><span class="celcius">°C</span> / <span class="farenheit active">°F</span></button>
     </header>
     <div class="main">
@@ -23,23 +25,23 @@
     </div>
     <div class="extra-info">
       <div>
-        <div class="label">Sunrise</div>
+        <div class="label">SUNRISE</div>
         <div class="value sunrise"></div>
       </div>
       <div>
-        <div class="label">Sunset</div>
+        <div class="label">SUNSET</div>
         <div class="value sunset"></div>
       </div>
       <div>
-        <div class="label">Chance of rain</div>
+        <div class="label">CHANCE OF RAIN</div>
         <div class="value chance-of-rain"></div>
       </div>
       <div>
-        <div class="label">Humidity</div>
+        <div class="label">HUMIDITY</div>
         <div class="value humidity"></div>
       </div>
       <div>
-        <div class="label">Feels like</div>
+        <div class="label">FEELS LIKE</div>
         <div class="value feels-like"></div>
       </div>
     </div>
@@ -48,7 +50,7 @@
       <div class="forecast-info">
         <table>
           <thead>
-            <tr>
+            <tr class="top-row">
               <th scope="col">Day</th>
               <th scope="col">Icon</th>
               <th scope="col">Chance of rain</th>
