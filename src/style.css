@@ -16,3 +16,14 @@
   flex-direction: column;
   align-items: center;
 }
+
+.forecast-title{
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.forecast-info > div{
+  display: flex;
+  justify-content: space-evenly;
+}

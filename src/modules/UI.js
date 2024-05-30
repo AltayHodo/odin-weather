@@ -1,6 +1,6 @@
 import { getData } from './data';
-async function renderUI() {
-  const currentDataObj = await getData();
+async function renderUI(city) {
+  const currentDataObj = await getData(city);
   console.log(currentDataObj);
   const name = document.querySelector('.name');
   const condition = document.querySelector('.condition');
@@ -25,6 +25,15 @@ async function renderUI() {
   feelsLike.textContent = `${currentDataObj.feelsLike}°`;
 }
 
-renderUI();
+renderUI('phoenix');
+
+const searchButton = document.querySelector('#search-button');
+searchButton.addEventListener('click', updateCity)
+
+function updateCity(){
+  const newCity = document.querySelector('#search').value;
+  if(newCity === '') return;
+  renderUI(newCity);
+}
 
 export default renderUI;
