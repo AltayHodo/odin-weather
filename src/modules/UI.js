@@ -1,11 +1,19 @@
-import { getData } from './data';
-async function renderUI(city) {
-  const currentDataObj = await getData(city);
+import { getData } from './data.js';
 
-  if(!currentDataObj){
+let isFahrenheit = true;
+let currentDataObj = null;
+
+async function renderUI(city) {
+  currentDataObj = await getData(city);
+
+  if (!currentDataObj) {
     return;
   }
 
+  updateUI(currentDataObj);
+}
+
+function updateUI() {
   const name = document.querySelector('.name');
   const condition = document.querySelector('.condition');
   const currentTemp = document.querySelector('.current-temp');
@@ -13,8 +21,10 @@ async function renderUI(city) {
 
   name.textContent = `${currentDataObj.cityName}, ${currentDataObj.countryName}`;
   condition.textContent = `${currentDataObj.condition}`;
-  currentTemp.textContent = `${currentDataObj.currentTemp}°`;
-  tempRange.textContent = `H: ${currentDataObj.maxTemp}° L: ${currentDataObj.minTemp}°`;
+  currentTemp.textContent = `${convertTemp(currentDataObj.currentTemp)}°`;
+  tempRange.textContent = `H: ${convertTemp(
+    currentDataObj.maxTemp
+  )}° L: ${convertTemp(currentDataObj.minTemp)}°`;
 
   const sunrise = document.querySelector('.sunrise');
   const sunset = document.querySelector('.sunset');
@@ -26,11 +36,10 @@ async function renderUI(city) {
   sunset.textContent = `${currentDataObj.sunset}`;
   chanceOfRain.textContent = `${currentDataObj.chanceOfRain}%`;
   humidity.textContent = `${currentDataObj.humidity}%`;
-  feelsLike.textContent = `${currentDataObj.feelsLike}°`;
-
+  feelsLike.textContent = `${convertTemp(currentDataObj.feelsLike)}°`;
 
   const forecastRows = document.querySelector('#forecast-rows');
-  forecastRows.innerHTML = ''
+  forecastRows.innerHTML = '';
   currentDataObj.forecastInfo.forEach((day) => {
     const forecastRow = document.createElement('tr');
     forecastRow.innerHTML = `
@@ -38,10 +47,25 @@ async function renderUI(city) {
       <td><img src=${day.conditionIcon} alt="weather-icon"></td>
       <td>${day.chanceOfRain}%</td>
       <td>${day.humidity}%</td>
-      <td>${day.minTemp}° - ${day.maxTemp}°</td>
+      <td>${convertTemp(day.minTemp)}° - ${convertTemp(day.maxTemp)}°</td>
     `;
     forecastRows.appendChild(forecastRow);
   });
+}
+
+function convertTemp(temp) {
+  if (isFahrenheit) {
+    return temp;
+  } else {
+    return (((temp - 32) * 5) / 9).toFixed(1);
+  }
+}
+
+function toggleTempUnit() {
+  isFahrenheit = !isFahrenheit;
+  document.querySelector('.farenheit').classList.toggle('active');
+  document.querySelector('.celcius').classList.toggle('active');
+  updateUI();
 }
 
 renderUI('phoenix');
@@ -54,5 +78,8 @@ function updateCity() {
   if (newCity === '') return;
   renderUI(newCity);
 }
+
+const toggleTempButton = document.querySelector('#toggle-temp-button');
+toggleTempButton.addEventListener('click', toggleTempUnit);
 
 export default renderUI;
