@@ -53,7 +53,7 @@ function updateUI() {
   currentDataObj.forecastInfo.forEach((day) => {
     const forecastRow = document.createElement('tr');
     forecastRow.innerHTML = `
-      <td>${day.date}</td>
+      <td>${getDayOfWeek(day.date)}</td>
       <td><img src=${day.conditionIcon} alt="weather-icon"></td>
       <td>${day.chanceOfRain}%</td>
       <td>${day.humidity}%</td>
@@ -61,6 +61,13 @@ function updateUI() {
     `;
     forecastRows.appendChild(forecastRow);
   });
+}
+
+function getDayOfWeek(dateString){
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const date = new Date(dateString);
+  const dayOfWeek = date.getUTCDay(); 
+  return daysOfWeek[dayOfWeek];
 }
 
 function convertTemp(temp) {
